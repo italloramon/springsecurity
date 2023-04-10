@@ -19,9 +19,10 @@ import javax.sql.DataSource;
 public class ProjectSecurityConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests()
+        http.csrf().disable()
+                .authorizeHttpRequests()
                 .requestMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards").authenticated()
-                .requestMatchers("/contact", "/notices").permitAll()
+                .requestMatchers("/contact", "/notices", "/register").permitAll()
                 .and()
                 .formLogin()
                 .and()
